@@ -1,0 +1,29 @@
+/* scrollbar.css */
+.custom-scrolbar-c::-webkit-scrollbar {
+  width: 18px;
+  padding: 10px;
+}
+
+.custom-scrolbar-c::-webkit-scrollbar-track {
+  background: #EFF6FF;
+  border-radius: 8px;
+  margin: 16px 0; /* This will create space at top and bottom */
+}
+
+.custom-scrolbar-c::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  border-radius: 8px;
+  border: 3px solid #CEE7FE; /* This matches your container background */
+  background-clip: padding-box;
+}
+
+.custom-scrolbar-c::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #0056b3, #003a8b);
+  border: 3px solid #CEE7FE;
+}
+
+/* Hide scrollbar buttons */
+.custom-scrolbar-c::-webkit-scrollbar-button {
+  display: none;
+}
+

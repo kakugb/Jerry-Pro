@@ -1,0 +1,164 @@
+[
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 1.6399999999999992,
+        "end_time": 6.1,
+        "text": " Hi, I'm Sarah from Codecademy, and today we're going to talk about a fundamental concept"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 6.1,
+        "end_time": 7.2,
+        "text": " in computer science."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 7.64,
+        "end_time": 8.0,
+        "text": " Loops."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 8.8,
+        "end_time": 12.46,
+        "text": " Life, like programming, is full of repeating routines and sub-routines."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 13.04,
+        "end_time": 14.64,
+        "text": " Every day we wake up and brush our teeth."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 15.06,
+        "end_time": 18.7,
+        "text": " We don't just brush one tooth, we brush each tooth in our mouth until we've brushed all"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 18.7,
+        "end_time": 19.24,
+        "text": " of our teeth."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 19.96,
+        "end_time": 23.92,
+        "text": " In programming, when we know we're going to use a routine again, it's good practice to"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 23.92,
+        "end_time": 26.7,
+        "text": " put that routine into a function so that we can reuse it."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 26.7,
+        "end_time": 31.72,
+        "text": " When we want to repeat a function or sub-routine multiple times in a row, we can use loops."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 32.68,
+        "end_time": 36.46,
+        "text": " The other day, I wrote some instructions for frosting a cupcake and put them in a handy"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 36.46,
+        "end_time": 40.12,
+        "text": " function, frost cupcakes, so that I could reuse them whenever I needed."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 40.86,
+        "end_time": 42.82,
+        "text": " Say I need to frost three cupcakes in a row."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 43.4,
+        "end_time": 44.58,
+        "text": " Okay, no problem."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 44.9,
+        "end_time": 46.92,
+        "text": " I can just call my function three times, right?"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 47.46,
+        "end_time": 51.0,
+        "text": " But what if I needed to frost five, ten, or even a thousand cupcakes?"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 51.76,
+        "end_time": 53.4,
+        "text": " Here's where a loop saves the day."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 54.36,
+        "end_time": 58.92,
+        "text": " A loop allows you to continually execute the same code multiple times, or loop through"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_00_00.mp3",
+        "start_time": 58.92,
+        "end_time": 59.44,
+        "text": " a routine."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 0.0,
+        "end_time": 4.16,
+        "text": " a stopping condition is met. There are different types of loops and each programming"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 4.16,
+        "end_time": 8.58,
+        "text": " language has their own syntax, but all loops have one thing in common, a stopping"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 8.58,
+        "end_time": 13.2,
+        "text": " condition. This condition is checked every round, and the loop will continue to run until"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 13.2,
+        "end_time": 17.76,
+        "text": " the condition is reached. If our goal was to frost four cupcakes, the loop stopping"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 17.76,
+        "end_time": 22.1,
+        "text": " condition would specify to continue to frost cupcakes until four cupcakes have been frosted."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 22.64,
+        "end_time": 27.76,
+        "text": " So our loop would run frost cupcakes four times, giving us four fully frosted cupcakes."
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 28.88,
+        "end_time": 33.2,
+        "text": " Loops allow us to tell the computer where to start and provide a condition upon which to stop,"
+    },
+    {
+        "file": "Intro_to_Programming_-_Loops_segment_01_00.mp3",
+        "start_time": 33.64,
+        "end_time": 37.22,
+        "text": " all in a few easy-to-read lines of code, which is super sweet."
+    }
+]

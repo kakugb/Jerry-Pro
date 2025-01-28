@@ -1,0 +1,35 @@
+/* Sidebar transition */
+.sidebar-transition {
+    transition: all 0.3s ease;
+  }
+  
+  /* Toggle button hover effect */
+  .sidebar-toggle:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Icon container for consistent width when collapsed */
+  .icon-container {
+    min-width: 24px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Tooltip for collapsed state */
+  .sidebar-tooltip {
+    position: absolute;
+    left: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  
+  .sidebar-item:hover .sidebar-tooltip {
+    opacity: 1;
+  }
