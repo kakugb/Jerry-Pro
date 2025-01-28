@@ -1,0 +1,255 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./KnowledgeBases.css";
+
+function KnowledgeBases() {
+  const [knowledgeBases, setKnowledgeBases] = useState([]); // List of knowledge bases
+  const [activeKnowledgeBaseId, setActiveKnowledgeBaseId] = useState(null); // Current active knowledge base ID
+  const [showAddKnowledgeBase, setShowAddKnowledgeBase] = useState(false);
+  const [showTrainKnowledgeBase, setShowTrainKnowledgeBase] = useState(false);
+  const [newKnowledgeBase, setNewKnowledgeBase] = useState({ title: "", description: "" });
+  const [dataSources, setDataSources] = useState([]); // List of data sources
+  const [selectedKnowledgeBase, setSelectedKnowledgeBase] = useState(null); // Selected KB for training
+  const [selectedDataSources, setSelectedDataSources] = useState([]); // Selected data sources for training
+
+  // Fetch all knowledge bases and the active one
+  const fetchKnowledgeBases = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/knowledgeBases");
+      setKnowledgeBases(response.data.data);
+
+      // Find and set the active knowledge base
+      const activeKB = response.data.data.find((kb) => kb.isActive);
+      if (activeKB) {
+        setActiveKnowledgeBaseId(activeKB.id);
+      }
+    } catch (error) {
+      console.error("Error fetching knowledge bases:", error);
+    }
+  };
+
+  // Fetch all data sources
+  const fetchDataSources = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/dataSources");
+      setDataSources(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data sources:", error);
+    }
+  };
+
+  // Set a knowledge base as active
+  const handleSetActive = async (id) => {
+    try {
+      await axios.post("http://localhost:5000/api/knowledgeBases/setActive", { id });
+      setActiveKnowledgeBaseId(id);
+      alert(`Knowledge Base ID ${id} is now active.`);
+    } catch (error) {
+      console.error("Error setting active knowledge base:", error);
+      alert("Failed to set the active knowledge base.");
+    }
+  };
+
+  // Add a new knowledge base
+  const handleAddKnowledgeBase = async (e) => {
+    e.preventDefault();
+    if (!newKnowledgeBase.title || !newKnowledgeBase.description) {
+      alert("Please provide a title and description for the knowledge base.");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:5000/api/knowledgeBases", {
+        title: newKnowledgeBase.title,
+        description: newKnowledgeBase.description,
+        isActive: false,
+      });
+
+      alert("Knowledge base added successfully!");
+      setShowAddKnowledgeBase(false);
+      setNewKnowledgeBase({ title: "", description: "" });
+      fetchKnowledgeBases();
+    } catch (error) {
+      console.error("Error adding knowledge base:", error);
+      alert("Failed to add knowledge base.");
+    }
+  };
+
+  // Start training the selected knowledge base with selected data sources
+  const handleTrainKnowledgeBase = async () => {
+    if (!selectedKnowledgeBase || selectedDataSources.length === 0) {
+      alert("Please select a knowledge base and at least one data source for training.");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:5000/api/trainKnowledgeBase", {
+        knowledgeBaseId: selectedKnowledgeBase, // Send KB ID
+        dataSourceIds: selectedDataSources,
+      });
+
+      alert("Training started successfully!");
+      setShowTrainKnowledgeBase(false);
+
+      // Reset the selected data sources after training
+      setSelectedDataSources([]);
+    } catch (error) {
+      console.error("Error starting training:", error);
+      alert("Failed to start training.");
+    }
+  };
+
+  // Submit a query to the active knowledge base
+  const handleQuerySubmit = async (query) => {
+    try {
+      const response = await axios.post("http://localhost:5000/chat", {
+        query, // Send only the query
+        knowledge_base_id: activeKnowledgeBaseId, // Pass the active knowledge base ID
+        
+      });
+      console.log("knowledge based id: ",activeKnowledgeBaseId );
+      console.log("Response from chat API:", response.data);
+      alert("Response: " + response.data.response);
+    } catch (error) {
+      console.error("Error submitting query:", error);
+      alert("Failed to fetch response.");
+    }
+  };
+  
+
+  // Show the training modal and fetch data sources
+  const handleShowTrainKnowledgeBase = () => {
+    setShowTrainKnowledgeBase(true);
+    fetchDataSources();
+  };
+
+  useEffect(() => {
+    fetchKnowledgeBases();
+  }, []);
+
+  return (
+    <div className="knowledge-bases-container">
+      <h1>Knowledge Bases</h1>
+
+      {!showAddKnowledgeBase && !showTrainKnowledgeBase && (
+        <>
+          <button className="add-kb-btn" onClick={() => setShowAddKnowledgeBase(true)}>
+            + Add New Knowledge Base
+          </button>
+          <button className="train-kb-btn" onClick={handleShowTrainKnowledgeBase}>
+            Train Knowledge Base
+          </button>
+        </>
+      )}
+
+      {showAddKnowledgeBase && (
+        <form className="add-kb-form" onSubmit={handleAddKnowledgeBase}>
+          <h2>Add Knowledge Base</h2>
+          <div className="field">
+            <label>Title</label>
+            <input
+              type="text"
+              placeholder="Enter knowledge base title"
+              value={newKnowledgeBase.title}
+              onChange={(e) => setNewKnowledgeBase({ ...newKnowledgeBase, title: e.target.value })}
+            />
+          </div>
+          <div className="field">
+            <label>Description</label>
+            <textarea
+              placeholder="Enter a description for the knowledge base"
+              value={newKnowledgeBase.description}
+              onChange={(e) =>
+                setNewKnowledgeBase({ ...newKnowledgeBase, description: e.target.value })
+              }
+            ></textarea>
+          </div>
+          <button type="submit">Add Knowledge Base</button>
+          <button type="button" onClick={() => setShowAddKnowledgeBase(false)}>
+            Cancel
+          </button>
+        </form>
+      )}
+
+      {showTrainKnowledgeBase && (
+        <>
+          <h2>Select Knowledge Base for Training</h2>
+          <ul>
+            {knowledgeBases.map((kb) => (
+              <li key={kb.id}>
+                <label>
+                  <input
+                    type="radio"
+                    name="knowledgeBase"
+                    value={kb.id}
+                    onChange={(e) => setSelectedKnowledgeBase(parseInt(e.target.value))}
+                  />
+                  {kb.title}
+                </label>
+              </li>
+            ))}
+          </ul>
+
+          <h2>Select Data Sources for Training</h2>
+          <ul>
+            {dataSources.map((source) => (
+              <li key={source.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    value={source.id}
+                    onChange={(e) => {
+                      const sourceId = parseInt(e.target.value);
+                      setSelectedDataSources((prev) =>
+                        e.target.checked
+                          ? [...prev, sourceId]
+                          : prev.filter((id) => id !== sourceId)
+                      );
+                    }}
+                  />
+                  {source.name} ({source.type})
+                </label>
+              </li>
+            ))}
+          </ul>
+
+          <button onClick={handleTrainKnowledgeBase}>Start Training</button>
+          <button onClick={() => setShowTrainKnowledgeBase(false)}>Cancel</button>
+        </>
+      )}
+
+      {!showAddKnowledgeBase && !showTrainKnowledgeBase && (
+        <table className="knowledge-bases-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {knowledgeBases.map((kb) => (
+              <tr key={kb.id}>
+                <td>{kb.id}</td>
+                <td>{kb.title}</td>
+                <td>{kb.description}</td>
+                <td>
+                  <button
+                    className={`set-active-btn ${activeKnowledgeBaseId === kb.id ? "active" : ""}`}
+                    onClick={() => handleSetActive(kb.id)}
+                    disabled={activeKnowledgeBaseId === kb.id}
+                  >
+                    {activeKnowledgeBaseId === kb.id ? "Active" : "Set Active"}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+export default KnowledgeBases;

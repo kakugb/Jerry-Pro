@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "text": "Python is a versatile programming language used for various applications such as web development, data analysis, artificial intelligence, and more.",
+            "reference": "https://www.python.org/"
+        },
+        {
+            "text": "Artificial Intelligence enables machines to mimic human intelligence and perform tasks such as learning, reasoning, and problem-solving.",
+            "reference": "https://www.ibm.com/cloud/learn/what-is-artificial-intelligence"
+        },
+        {
+            "text": "Machine learning is a subset of AI that focuses on the use of data and algorithms to imitate the way humans learn.",
+            "reference": "https://www.sas.com/en_us/insights/analytics/machine-learning.html"
+        },
+        {
+            "text": "React is a JavaScript library for building user interfaces, maintained by Facebook and a community of individual developers.",
+            "reference": "https://reactjs.org/"
+        },
+        {
+            "text": "SQL is a standard language for storing, manipulating, and retrieving data in databases.",
+            "reference": "https://www.w3schools.com/sql/"
+        }
+    ]
+}
